@@ -4,6 +4,6 @@ output "instance_id" {
 }
 
 output "user_ids" {
-  description = "The user IDs created by the example."
+  description = "The user IDs created by the example (app + reporting)."
   value       = module.flex_mongodb.user_ids
 }
