@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.0 (2026-09-23)
+
+### Features
+
+* Initial STACKIT MongoDB Flex module ([8401541](https://github.com/terraform-stackit-modules/terraform-stackit-flex-mongodb/commit/8401541e182e96a271ca83075ec8861260e7a9d6))
+
 ## [1.0.1](https://github.com/terraform-stackit-modules/terraform-repo-template/compare/v1.0.0...v1.0.1) (2026-09-09)
 
 ### Bug Fixes
