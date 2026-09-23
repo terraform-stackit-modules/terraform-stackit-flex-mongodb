@@ -7,6 +7,38 @@ This file provides context and instructions for AI coding agents (Copilot, Curso
 This is a Terraform module for [STACKIT](https://www.stackit.de/en/), the cloud platform by Schwarz Group.
 It is part of the [terraform-stackit-modules](https://github.com/terraform-stackit-modules) organization, which aims to provide community-maintained, production-grade Terraform modules for STACKIT.
 
+### This module: flex-mongodb
+
+Composite module for STACKIT **MongoDB Flex**. Repo name uses a hyphen (`flex-mongodb`); provider
+resources are `stackit_mongodbflex_instance` / `stackit_mongodbflex_user`.
+
+**Sub-modules**
+- `modules/instance` — `stackit_mongodbflex_instance` (toggled by `create_instance` via `count`).
+- `modules/user` — `stackit_mongodbflex_user` (`for_each` over `users`).
+
+**Key inputs** — `project_id` (req), `region`, `create_instance`/`instance_id`, `name`,
+`mongodb_version`, `acl`, `replicas`, `backup_schedule`, `flavor` ({cpu,ram}), `storage`
+({class,size}), `options` ({type, point_in_time_window_hours, *_retention_*}),
+`users` (map keyed by stable id: `{username, database, roles, rotate_when_changed?}`).
+
+**Outputs** — `instance_id`, `user_ids`, `usernames`, `user_passwords` (sensitive),
+`user_uris` (sensitive).
+
+**Gotchas**
+- MongoDB Flex exposes replication NATIVELY: `options.type = "Replica"` + `replicas = 3` (the
+  `replica` example). No plan/flavor trick like the SQL engines.
+- Instance requires flavor + storage + options + replicas + backup_schedule + version + acl (all
+  required by the provider when creating).
+- `options.type` validated Single/Replica/Sharded.
+- MongoDB `username` constraint (provider-enforced, NOT shared by the SQL engines): must start
+  with a letter, 3-63 chars, letters/digits/hyphens only, no trailing hyphen, and **no underscore**
+  (`app_user` is rejected — use `app-user`).
+- `users` keyed by a stable id; instance_id (known-after-apply) is only an attribute, never a
+  for_each key. No database resource — the user's `database` is a free string, so NO
+  owner-ordering issue like postgres/sqlserver.
+- Password/uri outputs are `sensitive = true`.
+- Complete/replica tests self-skip in CI (TERRATEST_RUN_ALL); CI runs only basic.
+
 ## Repository structure
 
 ```
