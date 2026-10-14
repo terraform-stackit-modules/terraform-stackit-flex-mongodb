@@ -3,7 +3,7 @@
 
 Terraform module which provisions a [STACKIT MongoDB](https://registry.terraform.io/providers/stackitcloud/stackit/latest/docs/resources/mongodbflex_instance) Flex instance and its users on [STACKIT](https://www.stackit.de/en/).
 
-[![Terraform Registry](https://img.shields.io/endpoint?url=https://registry.terraform.io/v1/modules/terraform-stackit-modules/flex-mongodb/stackit/latest)](https://registry.terraform.io/modules/terraform-stackit-modules/flex-mongodb/stackit/latest)
+[![Terraform Registry](https://img.shields.io/github/v/release/terraform-stackit-modules/terraform-stackit-flex-mongodb?label=registry&color=7B42BC&logo=terraform&logoColor=white&style=flat)](https://registry.terraform.io/modules/terraform-stackit-modules/flex-mongodb/stackit/latest)
 [![License](https://img.shields.io/github/license/terraform-stackit-modules/terraform-stackit-flex-mongodb)](./LICENSE)
 
 This repository is not from the official STACKIT organization.
